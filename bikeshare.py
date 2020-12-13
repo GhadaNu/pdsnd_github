@@ -18,16 +18,17 @@ def get_filters():
     """
     print('Hello! Let\'s explore some US BikeShare data!')
 
-    # TO DO: get user input for city (chicago, new york city, washington). HINT: Use a while loop to handle invalid inputs
+    # TO DO: get user input for city (chicago, new york city, washington)
     city = input("Enter name of the city to analyze: chicago,new york city, washington. \n ").lower()
 
+    # Use a while loop to handle invalid inputs..
     while city not in CITY_DATA:
         print("the city you Entered dose not exist! chose from these three cities: chicago,new york city, washington.\n ")
         city = input("Enter name of the 'City' to analyze:\n ").lower()
 
     # Ask user what he/she like to filter with..
     filter = input("Would you like to filter the data by 'month', 'day', or 'both'.\n").lower()
-
+    # Use a while loop to handle invalid inputs..
     while filter not in (['month', 'day', 'both']):
         print("You provided invalid filter")
         filter = input("Would you like to filter the data by 'month', 'day', or 'both'.\n").lower()
@@ -192,12 +193,12 @@ def main():
         trip_duration_stats(df)
         user_stats(df)
 
-
+        # Ask user if want to view 5 rows of individual trip data..
         view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no\n')
 
         start_loc = 0
         end_loc = 5
-
+        # Use while loop to display the rows..
         while view_data == 'yes':
             print(df.iloc[start_loc:end_loc])
 
