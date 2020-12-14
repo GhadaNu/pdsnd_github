@@ -104,7 +104,7 @@ def time_stats(df):
     """Displays statistics on the most frequent times of travel."""
 
     print('\nCalculating The Most Frequent Times of Travel...\n')
-
+    start_time = time.time()
     # TO DO: display the most common month
     common_month = df['month'].mode()[0]
 
@@ -117,8 +117,8 @@ def time_stats(df):
     # TO DO: display the most common start hour
     common_start_hour = df['Start_hour'].mode()[0]
 
-    print("Month = {}\nDay of Week = {}\nPopular Start Hour = {}".format(common_month,common_day,common_start_hour))
-
+    print(f"Month = {common_month}\nDay of Week = {common_day}\nPopular Start Hour = {common_start_hour}")
+    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
 
@@ -126,7 +126,7 @@ def station_stats(df):
     """Displays statistics on the most popular stations and trip."""
 
     print('\nCalculating The Most Popular Stations and Trip...\n')
-
+    start_time = time.time()
     # TO DO: display most commonly used start station
     start_station = df["Start Station"].mode()[0]
 
@@ -137,8 +137,8 @@ def station_stats(df):
     combination = 'From ' + df['Start Station'] + ' To ' + df['End Station']
     popular_trip = combination.mode()[0]
 
-    print("Start Station: {}\nEnd Station: {}\nPopular Trip: {}".format(start_station,end_station,popular_trip))
-
+    print(f"Start Station: {start_station}\nEnd Station: {end_station}\nPopular Trip: {popular_trip}")
+    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
 
@@ -146,15 +146,16 @@ def trip_duration_stats(df):
     """Displays statistics on the total and average trip duration."""
 
     print('\nCalculating Trip Duration...\n')
-
+    start_time = time.time()
     # TO DO: display total travel time
     Total = df['Trip Duration'].sum()
 
     # TO DO: display mean travel time
     Mean = Total / len(df['Trip Duration'])
 
-    print("Total Travel Time = {}\nMean Travel Time = {}".format(Total,Mean))
+    print(f"Total Travel Time = {Total}\nMean Travel Time = {Mean}")
 
+    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
 
@@ -162,26 +163,43 @@ def user_stats(df):
     """Displays statistics on BikeShare users."""
 
     print('\nCalculating User Stats...\n')
-
+    start_time = time.time()
     # TO DO: Display counts of user types
     user_type = df['User Type'].value_counts()
-    print("User Type: \n{}\n".format(user_type))
+    print(f"User Type: \n{user_type}\n")
 
     # TO DO:Chick if the city has Gender column then display counts of gender
     if 'Gender' in (df.columns):
         gender = df['Gender'].value_counts()
-        print("Gender: \n{}\n".format(gender))
+        print(f"Gender: \n{gender}\n")
 
     # TO DO: Chick if the city has Gender column then display earliest, most recent, and most common year of birth
     if 'Birth Year' in (df.columns):
         earliest_year = df['Birth Year'].min()
         most_recent_year = df['Birth Year'].max()
         popular_year = df['Birth Year'].mode()[0]
-        print("Year Birth States:\nEarliest_year = {}, Most_recent_year = {}, Popular_year = {}".format(earliest_year,most_recent_year,popular_year))
-
+        print(f"Year Birth States:\nEarliest_year = {earliest_year}, Most_recent_year = {most_recent_year}, Popular_year = {popular_year}")
+    print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
+def ask_user(df):
+    # Ask user if he/she want to view 5 rows of individual trip data..
+    view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no\n')
+    start_loc = 0
+    end_loc = 5
+    # Use while loop to display the rows..
+    while view_data == 'yes':
+        print(df.iloc[start_loc:end_loc])
 
+        view_display = input("Do you wish to continue?: ").lower()
+
+        if view_display == 'yes':
+            print("You say yes .. So i will shaw you another 5 rows :)\n")
+            start_loc += 5
+            end_loc += 5
+            continue
+        else:
+            break
 
 def main():
     while True:
@@ -192,25 +210,9 @@ def main():
         station_stats(df)
         trip_duration_stats(df)
         user_stats(df)
+        ask_user(df)
 
-        # Ask user if want to view 5 rows of individual trip data..
-        view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no\n')
-
-        start_loc = 0
-        end_loc = 5
-        # Use while loop to display the rows..
-        while view_data == 'yes':
-            print(df.iloc[start_loc:end_loc])
-
-            view_display = input("Do you wish to continue?: ").lower()
-
-            if view_display == 'yes':
-                print("You say yes .. So i will shaw you another 5 rows :)\n")
-                start_loc += 5
-                end_loc += 5
-                continue
-            else:
-                break
+        
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
