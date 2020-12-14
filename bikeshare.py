@@ -116,7 +116,7 @@ def time_stats(df):
     # TO DO: display the most common start hour
     common_start_hour = df['Start_hour'].mode()[0]
 
-    print("Month = {}\nDay of Week = {}\nPopular Start Hour = {}".format(common_month,common_day,common_start_hour))
+    print(f"Month = {common_month}\nDay of Week = {common_day}\nPopular Start Hour = {common_start_hour}")
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
@@ -136,7 +136,7 @@ def station_stats(df):
     combination = 'From ' + df['Start Station'] + ' To ' + df['End Station']
     popular_trip = combination.mode()[0]
 
-    print("Start Station: {}\nEnd Station: {}\nPopular Trip: {}".format(start_station,end_station,popular_trip))
+    print(f"Start Station: {start_station}\nEnd Station: {end_station}\nPopular Trip: {popular_trip}")
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
@@ -152,7 +152,7 @@ def trip_duration_stats(df):
     # TO DO: display mean travel time
     Mean = Total / len(df['Trip Duration'])
 
-    print("Total Travel Time = {}\nMean Travel Time = {}".format(Total,Mean))
+    print(f"Total Travel Time = {Total}\nMean Travel Time = {Mean}")
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
@@ -165,19 +165,19 @@ def user_stats(df):
     start_time = time.time()
     # TO DO: Display counts of user types
     user_type = df['User Type'].value_counts()
-    print("User Type: \n{}\n".format(user_type))
+    print(f"User Type: \n{user_type}\n")
 
     # TO DO:Chick if the city has Gender column then display counts of gender
     if 'Gender' in (df.columns):
         gender = df['Gender'].value_counts()
-        print("Gender: \n{}\n".format(gender))
+        print(f"Gender: \n{gender}\n")
 
     # TO DO: Chick if the city has Gender column then display earliest, most recent, and most common year of birth
     if 'Birth Year' in (df.columns):
         earliest_year = df['Birth Year'].min()
         most_recent_year = df['Birth Year'].max()
         popular_year = df['Birth Year'].mode()[0]
-        print("Year Birth States:\nEarliest_year = {}, Most_recent_year = {}, Popular_year = {}".format(earliest_year,most_recent_year,popular_year))
+        print(f"Year Birth States:\nEarliest_year = {earliest_year}, Most_recent_year = {most_recent_year}, Popular_year = {popular_year}")
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
 
