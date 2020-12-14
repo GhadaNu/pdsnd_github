@@ -2,7 +2,7 @@
 This project was established on November 20th
 
 ### Project Title
-**Bike Share Data Analyst**
+**Explore US BikeShare Data**
 
 ![Image Caption](https://video.udacity-data.com/topher/2018/March/5aa7718d_divvy/divvy.jpg)
 
