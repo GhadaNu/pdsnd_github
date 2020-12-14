@@ -180,21 +180,10 @@ def user_stats(df):
         print(f"Year Birth States:\nEarliest_year = {earliest_year}, Most_recent_year = {most_recent_year}, Popular_year = {popular_year}")
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-' * 40)
+    
 
-
-
-def main():
-    while True:
-        city, month, day = get_filters()
-        df = load_data(city, month, day)
-
-        time_stats(df)
-        station_stats(df)
-        trip_duration_stats(df)
-        user_stats(df)
-
-
-        view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no\n')
+def ask_user(df):
+    view_data = input('\nWould you like to view 5 rows of individual trip data? Enter yes or no\n')
 
         start_loc = 0
         end_loc = 5
@@ -211,6 +200,19 @@ def main():
                 continue
             else:
                 break
+
+def main():
+    while True:
+        city, month, day = get_filters()
+        df = load_data(city, month, day)
+
+        time_stats(df)
+        station_stats(df)
+        trip_duration_stats(df)
+        user_stats(df)
+        ask_user(df)
+
+        
         restart = input('\nWould you like to restart? Enter yes or no.\n')
         if restart.lower() != 'yes':
             break
